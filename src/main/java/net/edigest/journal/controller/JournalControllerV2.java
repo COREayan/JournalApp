@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import net.edigest.journal.entity.Journal;
@@ -12,7 +13,8 @@ import net.edigest.journal.service.JournalService;
 
 
 
-@RestController("/journal/v2/")
+@RestController
+@RequestMapping("/journal/v2/")
 public class JournalControllerV2 {
     
     private final JournalService journalService;
