@@ -1,12 +1,11 @@
 package net.edigest.journal.controller;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import net.edigest.journal.entity.Journal;
 import net.edigest.journal.service.JournalService;
@@ -19,6 +18,7 @@ public class JournalControllerV2 {
     
     private final JournalService journalService;
 
+    @Autowired
     public JournalControllerV2(JournalService newJournalService) {
         this.journalService = newJournalService;
     }
@@ -30,7 +30,30 @@ public class JournalControllerV2 {
     
 
     @PostMapping()
-    public void createJournal(@RequestBody Journal newJournal) {
+    public Journal createJournal(@RequestBody Journal newJournal) {
         journalService.createJournal(newJournal);
+        return newJournal;
+    }
+
+    @GetMapping("id/{myId}")
+    public Journal getJournalById(@PathVariable ObjectId myId) {
+        return journalService.getJournalById(myId).orElse(null);
+    }
+
+    @PutMapping("id/{myId}")
+    public Journal updateJournalById(@PathVariable ObjectId myId, @RequestBody Journal newEntry) {
+        Journal old = journalService.getJournalById(myId).orElse(null);
+        if (old != null) {
+            old.setName(newEntry.getName() != null && !newEntry.getName().isEmpty() ? newEntry.getName() : old.getName());
+            old.setDescription(newEntry.getDescription() != null && !newEntry.getDescription().isEmpty() ? newEntry.getDescription() : old.getDescription());
+        }
+        journalService.updateJournal(old);
+        return old;
+    }
+
+    @DeleteMapping("id/{myId}")
+    public boolean deleteJournalById(@PathVariable ObjectId myId) {
+        journalService.getJournalById(myId);
+        return true;
     }
 }

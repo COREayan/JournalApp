@@ -2,6 +2,7 @@ package net.edigest.journal.entity;
 
 import java.time.LocalDate;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Journal {
     
     @Id
-    private Long id;
+    private ObjectId id;
     private String name;
     private String description;
     private LocalDate createDate;
@@ -17,17 +18,17 @@ public class Journal {
     public Journal() {
     }
 
-    public Journal(String description, Long id, String name) {
-        this.description = description;
+    public Journal(ObjectId id, String description, String name) {
         this.id = id;
+        this.description = description;
         this.name = name;
     }
 
-    public Long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
