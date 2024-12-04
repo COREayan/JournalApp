@@ -1,8 +1,9 @@
 package net.edigest.journal.controller;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+import net.edigest.journal.entity.User;
+import net.edigest.journal.service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,17 +19,17 @@ import net.edigest.journal.service.JournalService;
 @RestController
 @RequestMapping("/journal/v2/")
 public class JournalControllerV2 {
-    
-    private final JournalService journalService;
 
     @Autowired
-    public JournalControllerV2(JournalService newJournalService) {
-        this.journalService = newJournalService;
-    }
+    public JournalService journalService;
 
-    @GetMapping()
-    public ResponseEntity<?> getAllJournal() {
-        List<Journal> all = journalService.getAll();
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("{userName}")
+    public ResponseEntity<?> getAllJournalEntriesOfUser(@PathVariable String userName) {
+        User user = userService.findByUserName(userName);
+        List<Journal> all = user.getJournalList(); //journalService.getAll();
         if (all != null && !all.isEmpty()) {
             return new ResponseEntity<>(all, HttpStatus.OK);
         }
@@ -36,10 +37,10 @@ public class JournalControllerV2 {
     }
     
 
-    @PostMapping()
-    public ResponseEntity<Journal> createJournal(@RequestBody Journal newJournal) {
+    @PostMapping("{userName}")
+    public ResponseEntity<Journal> createJournal(@RequestBody Journal newJournal, @PathVariable String userName) {
         try {
-            journalService.createJournal(newJournal);
+            journalService.saveJournal(newJournal, userName);
             return new ResponseEntity<>(newJournal, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -67,9 +68,9 @@ public class JournalControllerV2 {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("id/{myId}")
-    public ResponseEntity<?> deleteJournalById(@PathVariable ObjectId myId) {
-        journalService.deleteJournal(myId);
+    @DeleteMapping("id/{userName}/{myId}")
+    public ResponseEntity<?> deleteJournalById(@PathVariable ObjectId myId, @PathVariable String userName) {
+        journalService.deleteJournal(myId, userName);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

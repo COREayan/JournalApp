@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import net.edigest.journal.entity.User;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,13 +14,12 @@ import net.edigest.journal.repository.JournalRepository;
 
 @Service
 public class JournalService {
-    
-    private final JournalRepository journalRepository;
 
     @Autowired
-    public JournalService(JournalRepository newJournalRepository) {
-        this.journalRepository = newJournalRepository;
-    }
+    public JournalRepository journalRepository;
+
+    @Autowired
+    public UserService userService;
 
     public List<Journal> getAll() {
         return journalRepository.findAll();
@@ -29,12 +29,18 @@ public class JournalService {
         return journalRepository.findById(myId);
     }
 
-    public void createJournal(Journal newJournal) {
+    public void saveJournal(Journal newJournal, String userName) {
+        User user = userService.findByUserName(userName);
         newJournal.setCreateDate(LocalDate.now());
-        journalRepository.insert(newJournal);
+        Journal saved = journalRepository.save(newJournal);
+        user.getJournalList().add(saved);
+        userService.updateUser(user);
     }
 
-    public void deleteJournal(ObjectId id) {
+    public void deleteJournal(ObjectId id, String userName) {
+        User user = userService.findByUserName(userName);
+        user.getJournalList().removeIf(x -> x.getId().equals(id));
+        userService.updateUser(user);
         journalRepository.deleteById(id);
     }
 
