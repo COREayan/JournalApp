@@ -52,6 +52,12 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!--dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok-maven-plugin</artifactId>
+			<version>1.16.12.0</version>
+		</dependency-->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -65,16 +71,16 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
+				<!--configuration>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
-							<version>1.18.36</version>
+							<version>1.16.12.0</version>
 						</path>
 					</annotationProcessorPaths>
 
-				</configuration>
+				</configuration-->
 			</plugin>
 		</plugins>
 	</build>
