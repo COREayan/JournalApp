@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.RequiredArgsConstructor;
 import net.edigest.journal.entity.User;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,10 @@ import net.edigest.journal.entity.Journal;
 import net.edigest.journal.repository.JournalRepository;
 
 @Service
+@RequiredArgsConstructor
 public class JournalService {
 
-    @Autowired
-    public JournalRepository journalRepository;
+    private final JournalRepository journalRepository;
 
     @Autowired
     public UserService userService;
