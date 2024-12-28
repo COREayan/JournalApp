@@ -1,19 +1,20 @@
 package net.edigest.journal.service;
 
-import net.edigest.journal.entity.Journal;
-import net.edigest.journal.entity.User;
-import net.edigest.journal.repository.UserRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import lombok.RequiredArgsConstructor;
+import net.edigest.journal.entity.User;
+import net.edigest.journal.repository.UserRepository;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public List<User> getAll() {
         return userRepository.findAll();

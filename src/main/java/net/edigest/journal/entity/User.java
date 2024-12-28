@@ -21,6 +21,7 @@ public class User {
     private String userName;
     @NonNull
     private String passWord;
+    private String role;
 
     @DBRef
     private List<Journal> journalList = new ArrayList<>();

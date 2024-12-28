@@ -4,13 +4,13 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import lombok.RequiredArgsConstructor;
-import net.edigest.journal.entity.User;
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
 import net.edigest.journal.entity.Journal;
+import net.edigest.journal.entity.User;
 import net.edigest.journal.repository.JournalRepository;
 
 @Service
@@ -19,8 +19,7 @@ public class JournalService {
 
     private final JournalRepository journalRepository;
 
-    @Autowired
-    public UserService userService;
+    private final UserService userService;
 
     public List<Journal> getAll() {
         return journalRepository.findAll();
@@ -30,6 +29,7 @@ public class JournalService {
         return journalRepository.findById(myId);
     }
 
+    @Transactional
     public void saveJournal(Journal newJournal, String userName) {
         User user = userService.findByUserName(userName);
         newJournal.setCreateDate(LocalDate.now());
