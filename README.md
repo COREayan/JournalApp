@@ -1,7 +1,10 @@
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <img width="686" height="386" alt="image" src="https://github.com/user-attachments/assets/0bbd7ce8-82ee-49b6-bfcf-04cefbaecc6d" />
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 **Spring Boot**
@@ -68,6 +71,9 @@ In the case of MongoDB, you don't have a traditional JPA persistence provider. M
 - **Query Method DSL** is a simple and convenient way to create queries based on method naming conventions, while the **Criteria API** offers a more dynamic and programmatic approach for building complex and custom queries.
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
