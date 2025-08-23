@@ -1,12 +1,5 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 <img width="686" height="386" alt="image" src="https://github.com/user-attachments/assets/0bbd7ce8-82ee-49b6-bfcf-04cefbaecc6d" />
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
 **Spring Boot**
 - Spring Boot is a framework for building applications in the Java programming language.
 - Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can just run.
@@ -69,11 +62,3 @@ In the case of MongoDB, you don't have a traditional JPA persistence provider. M
 - **Query Method DSL** and **Criteria API** are two different ways to interact with a database when using Spring Data JPA for relational databases and Spring Data MongoDB for MongoDB databses. 
 - Spring Data JPA is a part of the Spring Framework that simplifies data access in Java applications, while Spring Data MongoDB provides similar functionality for MongoDB.
 - **Query Method DSL** is a simple and convenient way to create queries based on method naming conventions, while the **Criteria API** offers a more dynamic and programmatic approach for building complex and custom queries.
-
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
