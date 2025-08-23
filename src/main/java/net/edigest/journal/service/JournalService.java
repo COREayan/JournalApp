@@ -14,12 +14,17 @@ import net.edigest.journal.entity.User;
 import net.edigest.journal.repository.JournalRepository;
 
 @Service
-@RequiredArgsConstructor
 public class JournalService {
+
 
     private final JournalRepository journalRepository;
 
     private final UserService userService;
+
+    public JournalService(JournalRepository journalRepository, UserService userService) {
+        this.journalRepository = journalRepository;
+        this.userService = userService;
+    }
 
     public List<Journal> getAll() {
         return journalRepository.findAll();
